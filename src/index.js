@@ -1,3 +1,4 @@
+import User from './User';
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
