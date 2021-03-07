@@ -13,9 +13,11 @@ class User {
   }
 
   calculateTotalPrice() {
-    return this.roomsBooked.reduce((totalPrice, room) => {
+    let totalPrice = this.roomsBooked.reduce((totalPrice, room) => {
       return totalPrice + room.costPerNight
     },0)
+
+    return Math.round(totalPrice * 100.0) / 100.0;
   }
 }
 
