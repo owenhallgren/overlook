@@ -43,6 +43,7 @@ function initialize (userData, roomData, bookedRoomData) {
   let bookRoomSection = document.querySelector(".book-room-section")
   let homePage = document.querySelector(".home-page")
   let homeButton = document.querySelector(".go-home-button")
+  let roomFilter = document.querySelector(".room-filter")
 
 
 
@@ -105,28 +106,34 @@ function displayBookedRooms() {
 
 
   function findOpenRooms(date) {
+    if(!roomFilter.value === default) {
 
-    let filteredByDate = bookedRoomData.filter(room => date === room.date )
-    let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
+      let filteredByDate = bookedRoomData.filter(room => date === room.date )
+      let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
+      let roomTypesToDisplay = roomsToDisplay.map(bookedRoom => roomData.find(room => room.roomType === roomFilter.value))
 
-    roomsToDisplay.forEach(room => {
-      openRoomsTableBody.innerHTML +=
-      `
-      <tr>
-        <td>${room.roomType}</td>
-        <td class="right-alligned">${room.numBeds}</td>
-        <td>${room.bedSize}</td>
-        <td>${room.bidet? 'Yes':''}</td>
-        <td class="right-alligned">${room.costPerNight}</td>
-        <td><button data-room="${room.number}" class="book-room-button">Book Room</button></td>
-      </tr>
+      roomTypesToDisplay.forEach(room => {
 
-      `
-    })
-    const bookedRoomButtons = document.querySelectorAll('.book-room-button')
-    bookedRoomButtons.forEach(function(currentBtn){
-      currentBtn.addEventListener('click', bookSelectedRoom)
-    })
+        openRoomsTableBody.innerHTML +=
+        `
+        <tr>
+          <td>${room.roomType}</td>
+          <td class="right-alligned">${room.numBeds}</td>
+          <td>${room.bedSize}</td>
+          <td>${room.bidet? 'Yes':''}</td>
+          <td class="right-alligned">${room.costPerNight}</td>
+          <td><button data-room="${room.number}" class="book-room-button">Book Room</button></td>
+        </tr>
+
+        `
+      })
+      const bookedRoomButtons = document.querySelectorAll('.book-room-button')
+      bookedRoomButtons.forEach(function(currentBtn){
+        currentBtn.addEventListener('click', bookSelectedRoom)
+      })
+
+    }
+
 
 
   }
