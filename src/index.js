@@ -32,6 +32,7 @@ function initialize (userData, roomData, bookedRoomData) {
   let bookRoomButton = document.querySelector(".book-room")
   let roomsBookedTable = document.querySelector(".rooms-booked-table")
   let tableBody = document.querySelector(".table-body");
+  let openRoomsTableBody = document.querySelector('.open-rooms-body')
 
 
 
@@ -52,9 +53,30 @@ function displayBookedRooms() {
     </tr>
 
     `
-  })
+  }) }
 
-}
+  findOpenRooms("2020/01/25")
+
+  function findOpenRooms(date) {
+    let filteredByDate = bookedRoomData.filter(room => date === room.date )
+    let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
+
+    roomsToDisplay.forEach(room => {
+      openRoomsTableBody.innerHTML +=
+      `
+      <tr>
+        <td>${room.roomType}</td>
+        <td class="right-alligned">${room.numBeds}</td>
+        <td>${room.bedSize}</td>
+        <td>${room.bidet? 'Yes':''}</td>
+        <td class="right-alligned">${room.costPerNight}</td>
+      </tr>
+
+      `
+    })
+  }
+
+
 
 function displayPrice() {
   // console.log(user.roomsBooked)

@@ -19,6 +19,10 @@ class User {
 
     return Math.round(totalPrice * 100.0) / 100.0;
   }
+
+  bookRoom(room) {
+    this.roomsBooked.push(room)
+  }
 }
 
 export default User;
