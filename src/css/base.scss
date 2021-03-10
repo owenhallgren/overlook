@@ -1,16 +1,31 @@
 
-.container {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
+body {
+    font-family: 'Josefin Slab';
+    background-color: #e0e0de;
+    font-size: 20px;
 }
+
 
 .rooms-booked {
-  width: 85%;
+  width: 60%;
+  display: inline-block;
 }
 
-.rooms-booked-table {
+.home-page {
+  display: inline-block;
+}
+
+.money-spent-section {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin-left: 25px;
+  width: 30%;
+  border: solid 1px black;
+
+}
+
+.rooms-booked-table, .open-rooms-table {
   width: 100%;
   border-collapse: collapse;
   th {
@@ -37,13 +52,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   text-align: center;
 }
 
-.money-spent-title{
-  margin-top: -5px;
-}
-
-.money-spent {
-  padding-right: 3em;
-}
 
 .hidden {
   display: none;

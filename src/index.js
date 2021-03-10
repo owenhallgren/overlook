@@ -30,11 +30,9 @@ window.addEventListener('load', fetchData)
 function initialize (userData, roomData, bookedRoomData) {
   let user = new User(userData[0], bookedRoomData, roomData);
   let moneySpent = document.querySelector(".money-spent");
-  // let bookRoomButton = document.querySelector(".book-room")
   let roomsBookedTable = document.querySelector(".rooms-booked-table")
   let tableBody = document.querySelector(".table-body");
   let openRoomsTableBody = document.querySelector('.open-rooms-body')
-  // let bookRoomButton = document.querySelector(".book-room-button")
   let dateInput = document.querySelector(".date-input")
   let findRoomButton = document.querySelector(".find-room")
   let successfulSubmit = document.querySelector(".successful-submit")
@@ -44,6 +42,8 @@ function initialize (userData, roomData, bookedRoomData) {
   let homePage = document.querySelector(".home-page")
   let homeButton = document.querySelector(".go-home-button")
   let roomFilter = document.querySelector(".room-filter")
+  let openRoomsTable = document.querySelector(".open-rooms-table")
+  let noRoomsMessage = document.querySelector(".no-rooms-message")
 
 
 
@@ -106,13 +106,47 @@ function displayBookedRooms() {
 
 
   function findOpenRooms(date) {
-    if(!roomFilter.value === default) {
-
+    openRoomsTableBody.innerHTML = ''
+    if(roomFilter.value !== `default`) {
       let filteredByDate = bookedRoomData.filter(room => date === room.date )
       let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
-      let roomTypesToDisplay = roomsToDisplay.map(bookedRoom => roomData.find(room => room.roomType === roomFilter.value))
+      let filteredTypeRooms = roomsToDisplay.map(bookedRoom => roomData.find(room => room.roomType === roomFilter.value))
 
-      roomTypesToDisplay.forEach(room => {
+      if(filteredByDate.length === 0) {
+        noRoomsMessage.classList.remove('hidden')
+      } else {
+        noRoomsMessage.classList.add("hidden")
+      }
+
+      filteredTypeRooms.forEach(room => {
+        openRoomsTableBody.innerHTML +=
+        `
+        <tr>
+          <td>${room.roomType}</td>
+          <td class="right-alligned">${room.numBeds}</td>
+          <td>${room.bedSize}</td>
+          <td>${room.bidet? 'Yes':''}</td>
+          <td class="right-alligned">${room.costPerNight}</td>
+          <td><button data-room="${room.number}" class="book-room-button">Book Room</button></td>
+        </tr>
+
+        `
+      })
+      const bookedRoomButtons = document.querySelectorAll('.book-room-button')
+      bookedRoomButtons.forEach(function(currentBtn){
+        currentBtn.addEventListener('click', bookSelectedRoom)
+      })
+    } else {
+      let filteredByDate = bookedRoomData.filter(room => date === room.date )
+      let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
+
+      if(filteredByDate.length === 0) {
+        noRoomsMessage.classList.remove('hidden')
+      } else {
+        noRoomsMessage.classList.add("hidden")
+      }
+
+      roomsToDisplay.forEach(room => {
 
         openRoomsTableBody.innerHTML +=
         `
@@ -131,17 +165,13 @@ function displayBookedRooms() {
       bookedRoomButtons.forEach(function(currentBtn){
         currentBtn.addEventListener('click', bookSelectedRoom)
       })
-
     }
-
-
-
   }
 
 
 
 function displayPrice() {
-  moneySpent.innerText = `${user.calculateTotalPrice()}`
+  moneySpent.innerText = `$${user.calculateTotalPrice()}`
 }
 
 function postBooking(date, roomNumber) {
