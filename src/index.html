@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Overlook Hotel</h1>
-    <button class="show-book-room-section">Book a Room</button>
+    <button aria-label="book a room" class="show-book-room-section">Book a Room</button>
     <section class="home-page">
       <p>Rooms Booked</p>
       <section class="rooms-booked">
@@ -29,11 +29,11 @@
         <p class="money-spent"></p>
       </section>
     </section>
-    <button class="go-home-button hidden">Go Home</button>
+    <button aria-label="go home" class="go-home-button hidden">Go Home</button>
       <section class="book-room-section hidden">
-        <button class="find-room">Find Room</button>
-        <input type="date" class="date-input">
-        <select class="room-filter">
+        <button aria-label="find room" class="find-room">Find Room</button>
+        <input aria-label="input date" type="date" class="date-input">
+        <select aria-label="filter by room type" class="room-filter">
         <option value="default">Filter By Room Type</option>
         <option value="suite">suit</option>
         <option value="residential suite">residential suit</option>
@@ -50,7 +50,7 @@
               <th>Bed Size</th>
               <th>Has Bidet</th>
               <th>Cost Per Night</th>
-              <th></th>
+              <td></td>
             </tr>
           <tbody class="open-rooms-body">
           </tbody>
