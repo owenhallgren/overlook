@@ -7,8 +7,9 @@
   </head>
   <body>
     <h1>Overlook Hotel</h1>
-    <p>Rooms Booked</p>
-    <div class="container">
+    <button class="show-book-room-section">Book a Room</button>
+    <section class="home-page">
+      <p>Rooms Booked</p>
       <section class="rooms-booked">
         <table class="rooms-booked-table">
           <tr>
@@ -22,25 +23,42 @@
         </tbody>
         </table>
       </section>
-      <section class="money-spent">
+      <section class="money-spent-section">
         <h1 class="money-spent-title">Money Spent</h1>
-        <p class="money-spent-test">test</p>
+        <p class="money-spent"></p>
       </section>
-    </div>
-    <section class="open-rooms">
-      <table class="open-rooms-table">
-        <tr>
-          <th>Room Type</th>
-          <th>Number Of Beds</th>
-          <th>Bed Size</th>
-          <th>Has Bidet</th>
-          <th>Cost Per Night</th>
-        </tr>
-      <tbody class="open-rooms-body">
-      </tbody>
-      </table>
     </section>
-    <button class="book-room">Book Room</button>
+    <button class="go-home-button hidden">Go Home</button>
+      <section class="book-room-section hidden">
+        <button class="find-room">Find Room</button>
+        <input type="date" class="date-input">
+        <select class="room-filter">
+        <option value="default">Filter By Room Type</option>
+        <option value="suite">suit</option>
+        <option value="residential suite">residential suit</option>
+        <option value="junior suit">junior suit</option>
+        <option value="single room">single room</option>
+      </select>
+      <p class="successful-submit hidden">Room Booked!</p>
+      <p class="failed-submit hidden">Error on our end, please refresh and try again</p>
+        <section class="open-rooms">
+          <table class="open-rooms-table">
+            <tr>
+              <th>Room Type</th>
+              <th>Number Of Beds</th>
+              <th>Bed Size</th>
+              <th>Has Bidet</th>
+              <th>Cost Per Night</th>
+              <th></th>
+            </tr>
+          <tbody class="open-rooms-body">
+          </tbody>
+          </table>
+        </section>
+        <p class="no-rooms-message hidden">No rooms match your search, we are so very sorry, please try again with different filters</p>
+      </section>
+
+
 
 
 
