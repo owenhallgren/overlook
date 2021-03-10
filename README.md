@@ -35,8 +35,6 @@ Overall this project was a great learning experience. I was able to take time to
 + [Login Page](#login)
 + [Display Booked Rooms](#display-booked-rooms)
 + [Book a room](#book-a-room)
-+ [Past Activity Cards](#past-activity-cards)
-+ [Persisting Cards](#persisting-cards)
 
 
 ## login
