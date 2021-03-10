@@ -28,7 +28,7 @@ window.addEventListener('load', fetchData)
 
 
 function initialize (userData, roomData, bookedRoomData) {
-  let user = new User(userData[0], bookedRoomData, roomData);
+  let user
   let moneySpent = document.querySelector(".money-spent");
   let roomsBookedTable = document.querySelector(".rooms-booked-table")
   let tableBody = document.querySelector(".table-body");
@@ -44,13 +44,43 @@ function initialize (userData, roomData, bookedRoomData) {
   let roomFilter = document.querySelector(".room-filter")
   let openRoomsTable = document.querySelector(".open-rooms-table")
   let noRoomsMessage = document.querySelector(".no-rooms-message")
+  let username = document.querySelector(".username")
+  let password = document.querySelector(".password")
+  let loginButton = document.querySelector(".login-button")
+  let invalidLogin = document.querySelector(".invalid-login")
+  let beforeLogin = document.querySelector(".before-login")
+  let loginPage = document.querySelector(".log-in")
 
 
 
-
+  loginButton.addEventListener("click", checkLogin)
   findRoomButton.addEventListener('click', findOpenRoomHelper)
   showBookedRoomSection.addEventListener('click', showBookRoomSection)
   homeButton.addEventListener("click", hideBookRoomSection)
+
+  function checkLogin() {
+    if(password.value === "overlook2021") {
+      login()
+    } else {
+      invalidLogin.classList.remove("hidden")
+    }
+
+  }
+
+  function login() {
+    let usernameToCheck = username.value.substring(0, 8)
+    if(usernameToCheck === 'customer') {
+      let userId = parseInt(username.value.substring(8, 10))
+      let userToUse = userData.find(user => user.id === userId)
+      user = new User(userToUse, bookedRoomData, roomData)
+      console.log(bookedRoomData)
+      console.log(user)
+      displayPrice();
+      displayBookedRooms();
+      loginPage.classList.add('hidden')
+      beforeLogin.classList.remove("hidden")
+    }
+  }
 
   function showBookRoomSection() {
     bookRoomSection.classList.remove('hidden')
@@ -66,6 +96,7 @@ function initialize (userData, roomData, bookedRoomData) {
     homeButton.classList.add("hidden")
     successfulSubmit.classList.add("hidden")
     failedSubmit.classList.add("hidden")
+    displayPrice();
   }
 
   function bookSelectedRoom(e) {
@@ -77,9 +108,6 @@ function initialize (userData, roomData, bookedRoomData) {
   }
 
 
-
-displayPrice();
-displayBookedRooms();
 
 function findOpenRoomHelper() {
   findOpenRooms(dateInput.value.replaceAll("-", "/"))
@@ -168,11 +196,10 @@ function displayBookedRooms() {
     }
   }
 
+  function displayPrice() {
+    moneySpent.innerText = `$${user.calculateTotalPrice()}`
+  }
 
-
-function displayPrice() {
-  moneySpent.innerText = `$${user.calculateTotalPrice()}`
-}
 
 function postBooking(date, roomNumber) {
   fetch(`http://localhost:3001/api/v1/bookings`, {
