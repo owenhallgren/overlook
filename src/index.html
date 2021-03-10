@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@500&display=swap" rel="stylesheet">
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <h1>Overlook Hotel</h1>
+    <p>Rooms Booked</p>
+    <div class="container">
+      <section class="rooms-booked">
+        <table class="rooms-booked-table">
+          <tr>
+            <th>Room Type</th>
+            <th>Number Of Beds</th>
+            <th>Bed Size</th>
+            <th>Has Bidet</th>
+            <th>Cost Per Night</th>
+          </tr>
+        <tbody class="table-body">
+        </tbody>
+        </table>
+      </section>
+      <section class="money-spent">
+        <h1 class="money-spent-title">Money Spent</h1>
+        <p class="money-spent-test">test</p>
+      </section>
+    </div>
+    <section class="open-rooms">
+      <table class="open-rooms-table">
+        <tr>
+          <th>Room Type</th>
+          <th>Number Of Beds</th>
+          <th>Bed Size</th>
+          <th>Has Bidet</th>
+          <th>Cost Per Night</th>
+        </tr>
+      <tbody class="open-rooms-body">
+      </tbody>
+      </table>
+    </section>
+    <button class="book-room">Book Room</button>
 
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
 
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+
   </body>
 </html>
