@@ -1,0 +1,22 @@
+.rooms-booked-table, .open-rooms-table {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    width: 10%;
+  }
+
+  td {
+    padding: 5px 10px;
+    width: 10%;
+
+    &.right-alligned{
+      text-align: right;
+    }
+  }
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
