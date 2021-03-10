@@ -3,10 +3,6 @@ import User from './User';
 let userData = [];
 let roomData = [];
 let bookedRoomData = [];
-let moneySpent = document.querySelector(".money-spent");
-let bookRoomButton = document.querySelector(".book-room")
-
-
 
 function fetchData() {
   fetch("http://localhost:3001/api/v1/customers")
@@ -25,7 +21,6 @@ function fetchData() {
   }))};
 
 window.addEventListener('load', fetchData)
-
 
 function initialize (userData, roomData, bookedRoomData) {
   let user
@@ -51,8 +46,6 @@ function initialize (userData, roomData, bookedRoomData) {
   let beforeLogin = document.querySelector(".before-login")
   let loginPage = document.querySelector(".log-in")
 
-
-
   loginButton.addEventListener("click", checkLogin)
   findRoomButton.addEventListener('click', findOpenRoomHelper)
   showBookedRoomSection.addEventListener('click', showBookRoomSection)
@@ -64,7 +57,6 @@ function initialize (userData, roomData, bookedRoomData) {
     } else {
       invalidLogin.classList.remove("hidden")
     }
-
   }
 
   function login() {
@@ -107,12 +99,9 @@ function initialize (userData, roomData, bookedRoomData) {
     postBooking(date, roomNumber)
   }
 
-
-
 function findOpenRoomHelper() {
   findOpenRooms(dateInput.value.replaceAll("-", "/"))
 }
-
 
 function displayBookedRooms() {
   user.roomsBooked.forEach(room => {
@@ -128,10 +117,6 @@ function displayBookedRooms() {
 
     `
   }) }
-
-
-
-
 
   function findOpenRooms(date) {
     openRoomsTableBody.innerHTML = ''
