@@ -999,6 +999,27 @@ const bookedRoomData = [
     "date": "2020/02/14",
     "roomNumber": 12,
     "roomServiceCharges": []
+  },
+  {
+    "id": "5fwrgu4i7k55hl6vh",
+    "userID": 13,
+    "date": "2020/02/19",
+    "roomNumber": 24,
+    "roomServiceCharges": []
+  },
+  {
+    "id": "5fwrgu4i7k55hl6vh",
+    "userID": 13,
+    "date": "2020/02/19",
+    "roomNumber": 10,
+    "roomServiceCharges": []
+  },
+  {
+    "id": "5fwrgu4i7k55hl6vh",
+    "userID": 13,
+    "date": "2020/02/19",
+    "roomNumber": 2,
+    "roomServiceCharges": []
   }
 ];
 
