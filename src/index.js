@@ -1,5 +1,6 @@
 import './css/base.scss';
 import User from './User';
+import RoomRepo from './RoomRepo';
 let userData = [];
 let roomData = [];
 let bookedRoomData = [];
@@ -24,6 +25,7 @@ window.addEventListener('load', fetchData)
 
 function initialize (userData, roomData, bookedRoomData) {
   let user
+  let roomRepo = new RoomRepo(roomData, bookedRoomData)
   let moneySpent = document.querySelector(".money-spent");
   let roomsBookedTable = document.querySelector(".rooms-booked-table")
   let tableBody = document.querySelector(".table-body");
@@ -65,8 +67,6 @@ function initialize (userData, roomData, bookedRoomData) {
       let userId = parseInt(username.value.substring(8, 10))
       let userToUse = userData.find(user => user.id === userId)
       user = new User(userToUse, bookedRoomData, roomData)
-      console.log(bookedRoomData)
-      console.log(user)
       displayPrice();
       displayBookedRooms();
       loginPage.classList.add('hidden')
@@ -121,17 +121,15 @@ function displayBookedRooms() {
   function findOpenRooms(date) {
     openRoomsTableBody.innerHTML = ''
     if(roomFilter.value !== `default`) {
-      let filteredByDate = bookedRoomData.filter(room => date === room.date )
-      let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
-      let filteredTypeRooms = roomsToDisplay.map(bookedRoom => roomData.find(room => room.roomType === roomFilter.value))
+      let roomTypeToDisplay = roomRepo.filterRoomsByType(date, roomFilter.value)
 
-      if(filteredByDate.length === 0) {
+      if(roomTypeToDisplay.length === 0) {
         noRoomsMessage.classList.remove('hidden')
       } else {
         noRoomsMessage.classList.add("hidden")
       }
 
-      filteredTypeRooms.forEach(room => {
+      roomTypeToDisplay.forEach(room => {
         openRoomsTableBody.innerHTML +=
         `
         <tr>
@@ -150,10 +148,9 @@ function displayBookedRooms() {
         currentBtn.addEventListener('click', bookSelectedRoom)
       })
     } else {
-      let filteredByDate = bookedRoomData.filter(room => date === room.date )
-      let roomsToDisplay = filteredByDate.map(bookedRoom => roomData.find(room => room.number === bookedRoom.roomNumber))
+      let roomsToDisplay = roomRepo.filterRoomsByDate(date)
 
-      if(filteredByDate.length === 0) {
+      if(roomsToDisplay.length === 0) {
         noRoomsMessage.classList.remove('hidden')
       } else {
         noRoomsMessage.classList.add("hidden")
